@@ -1,1 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📋 Avaliação Psiquiátrica · CAPS / Ambulatório</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #e9f0f5;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            padding: 1.5rem;
+            color: #1e2b3a;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        h1 { font-size: 2.2rem; font-weight: 400; border-bottom: 3px solid #2c6e9c; padding-bottom: 0.3rem; margin-bottom: 0.5rem; color: #0b3b5a; }
+        h2 { font-size: 1.5rem; margin: 0.8rem 0 0.2rem; color: #14471c; border-left: 5px solid #3f8ab3; padding-left: 0.7rem; background: #f4f9ff; line-height: 1.3; }
+        h3 { font-size: 1.2rem; margin: 1rem 0 0.3rem; color: #1d4e6f; }
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 15px 30px rgba(0,30,50,0.15);
+            border: 1px solid rgba(60,130,190,0.2);
+        }
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: flex-end;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 100px;
+        }
+        .input-group label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #2a5f7a;
+        }
+        .input-group input, .input-group select {
+            padding: 0.6rem 1rem;
+            border: 1px solid #bdd3e6;
+            border-radius: 40px;
+            font-size: 1rem;
+            background: #fafdff;
+            transition: 0.2s;
+        }
+        .input-group input:focus, .input-group select:focus {
+            border-color: #1f7faa;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(31,127,170,0.2);
+        }
+        .inline-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .inline-label span {
+            font-weight: 600;
+            background: #e1effa;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+        }
+        .btn {
+            background: #1d7aa3;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 8px rgba(0,60,100,0.2);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn:hover {
+            background: #0e5e85;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 14px rgba(0,40,70,0.3);
+        }
+        .btn-secondary {
+            background: #3f7890;
+        }
+        .btn-copy {
+            background: #2d6d4b;
+            float: right;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+            background: #f1f9fd;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 0.9rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #cbdae6;
+        }
+        th {
+            background: #c3dff5;
+            font-weight: 700;
+            color: #0a3144;
+        }
+        .meem-section {
+            background: #e9f2fa;
+            padding: 1.2rem 1.5rem;
+            border-radius: 28px;
+            margin: 1.5rem 0;
+        }
+        .meem-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin: 0.8rem 0;
+        }
+        .meem-item label {
+            min-width: 170px;
+            font-weight: 600;
+        }
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .radio-group input {
+            margin-right: 0.2rem;
+        }
+        .output-box {
+            background: #0e262e;
+            color: #d9f0fa;
+            padding: 1.5rem 2rem;
+            border-radius: 32px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+            border: 1px solid #2f7d9c;
+            box-shadow: inset 0 0 10px #00000030;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .generated-hda {
+            background: #10313c;
+        }
+        .footer-notes {
+            font-size: 0.8rem;
+            color: #2b5f7a;
+            margin-top: 1rem;
+            border-top: 1px dashed #9bbad0;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🧠 EXAME PSÍQUICO INTEGRADO · CAPS</h1>
 
+    <!-- PRIMEIRA PARTE: sexo, idade, peso, altura, IMC -->
+    <div class="card">
+        <h2>📌 Dados sociodemográficos e IMC</h2>
+        <div class="flex-row">
+            <div class="input-group">
+                <label>Sexo</label>
+                <select id="sexo">
+                    <option value="feminino">Feminino</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="outro">Outro / não binário</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Idade (anos)</label>
+                <input type="number" id="idade" min="0" max="120" value="35">
+            </div>
+            <div class="input-group">
+                <label>Peso (kg)</label>
+                <input type="number" id="peso" step="0.1" min="20" max="250" value="70.5">
+            </div>
+            <div class="input-group">
+                <label>Altura (m)</label>
+                <input type="number" id="altura" step="0.01" min="1.0" max="2.5" value="1.70">
+            </div>
+            <div class="input-group">
+                <label>IMC calculado</label>
+                <input type="text" id="imc" readonly value="24.4">
+            </div>
+            <div class="input-group">
+                <label>Classificação</label>
+                <input type="text" id="classIMC" readonly value="Peso normal">
+            </div>
+        </div>
+        <div style="margin-top:0.8rem">
+            <button class="btn" id="calcIMC">📐 Calcular IMC e classificar</button>
+        </div>
+    </div>
+
+    <!-- MINI EXAME DO ESTADO MENTAL (MEEM) completo -->
+    <div class="card meem-section">
+        <h2>🧩 Mini-Exame do Estado Mental (MEEM) · pontuação: <span id="meemTotal">0</span>/30</h2>
+        <table>
+            <tr><th>Item</th><th>Pontuação (selecionar)</th></tr>
+            <tr><td>Orientação temporal (ano, estaç, dia, mês) 0-5</td><td><select class="meem" id="meem1">${[0,1,2,3,4,5].map(i=>`<option value="${i}">${i}</option>`)}</select></td></tr>
+            <tr><td>Orientação espacial (país, estado, cidade, local, andar) 0-5</td><td><select class="meem" id="meem2">${[0,1,2,3,4,5].map(i=>`<option value="${i}">${i}</option>`)}</select></td></tr>
+            <tr><td>Registro (pente, rua, azul) 0-3</td><td><select class="meem" id="meem3">${[0,1,2,3].map(i=>`<option value="${i}">${i}</option>`)}</select></td></tr>
+            <tr><td>Atenção/cálculo (100-7 ou série) 0-5</td><td><select class="meem" id="meem4">${[0,1,2,3,4,5].map(i=>`<option value="${i}">${i}</option>`)}</select></td></tr>
+            <tr><td>Evocação (3 palavras) 0-3</td><td><select class="meem" id="meem5">${[0,1,2,3].map(i=>`<option value="${i}">${i}</option>`)}</select></td></tr>
+            <tr><td>Linguagem: nomear lápis/relógio (0-2)</td><td><select class="meem" id="meem6">${[0,1,2].map(i=>`<option value="${i}">${i}</option>`)}</select></td></tr>
+            <tr><td>Repetir "nem aqui, nem ali, nem lá" (0-1)</td><td><select class="meem" id="meem7"><option value="0">0</option><option value="1" selected>1</option></select></td></tr>
+            <tr><td>Comando três estágios (pegar/dobrar/colocar) 0-3</td><td><select class="meem" id="meem8">${[0,1,2,3].map(i=>`<option value="${i}">${i}</option>`)}</select></td></tr>
+            <tr><td>Ler e executar "FECHE OS OLHOS" (0-1)</td><td><select class="meem" id="meem9"><option value="0">0</option><option value="1">1</option></select></td></tr>
+            <tr><td>Escrever uma frase (0-1)</td><td><select class="meem" id="meem10"><option value="0">0</option><option value="1">1</option></select></td></tr>
+            <tr><td>Copiar desenho (0-1)</td><td><select class="meem" id="meem11"><option value="0">0</option><option value="1">1</option></select></td></tr>
+        </table>
+        <div style="display:flex; gap:1rem; align-items:center;">
+            <span style="font-weight:700;">Escore MEEM: <span id="meemValor">30</span>/30</span>
+            <span>📌 (ajuste conforme exame real)</span>
+        </div>
+    </div>
+
+    <!-- SELEÇÃO DE FUNÇÕES PSÍQUICAS (baseado nos PDFs) -->
+    <div class="card">
+        <h2>🧠 EXAME PSÍQUICO (selecionar achados predominantes)</h2>
+        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap: 1.5rem;">
+            <!-- consciência -->
+            <div><label>🧠 Consciência:</label> <select id="consciencia"><option value="lúcido">lúcido</option><option value="obnubilado">obnubilado</option><option value="sonolento">sonolento</option><option value="torporoso">torporoso</option><option value="estado crepuscular">estado crepuscular</option><option value="delirium">delirium</option></select></div>
+            <!-- atenção -->
+            <div><label>🎯 Atenção:</label> <select id="atencao"><option value="normoprosexia (eutênaz)">normoprosexia</option><option value="hipoprosexia">hipoprosexia</option><option value="hiperprosexia">hiperprosexia</option><option value="distração (hipertenaz/hipovigil)">distração</option><option value="disprosexia">disprosexia</option></select></div>
+            <!-- orientação -->
+            <div><label>🧭 Orientação:</label> <select id="orientacao"><option value="orientado auto e alopsiquicamente">orientado auto/alopsiquicamente</option><option value="desorientado temporal">desorientado temporal</option><option value="desorientado espacial">desorientado espacial</option><option value="desorientação amnésica">desorientação amnésica</option></select></div>
+            <!-- memória -->
+            <div><label>💾 Memória:</label> <select id="memoria"><option value="preservada">preservada</option><option value="hipomnésia anterógrada">hipomnésia anterógrada</option><option value="amnésia retrógrada">amnésia retrógrada</option><option value="confabulação">confabulação</option><option value="hipermnésia">hipermnésia</option></select></div>
+            <!-- inteligência -->
+            <div><label>📚 Inteligência:</label> <select id="inteligencia"><option value="dentro da média esperada">dentro da média</option><option value="inferior à média (leve)">inferior (leve)</option><option value="deficit moderado">déficit moderado</option><option value="superior à média">superior</option></select></div>
+            <!-- sensopercepção -->
+            <div><label>👁️ Sensopercepção:</label> <select id="sensopercepcao"><option value="sem alterações">sem alterações</option><option value="alucinação auditiva">alucinação auditiva</option><option value="alucinação visual">alucinação visual</option><option value="ilusão">ilusão</option><option value="alucinação cenestésica">cenestésica</option><option value="desrealização">desrealização</option></select></div>
+            <!-- afeto/humor -->
+            <div><label>😐 Afeto/humor:</label> <select id="afeto"><option value="eutímico">eutímico</option><option value="depressivo">depressivo</option><option value="ansioso">ansioso</option><option value="eufórico (hipertímico)">eufórico</option><option value="embotado">embotado</option><option value="irritável">irritável</option><option value="labilidade afetiva">labilidade</option></select></div>
+            <!-- pensamento (curso) -->
+            <div><label>⚡ Pensamento (curso):</label> <select id="pensamentoCurso"><option value="regular, sem aceleração">regular</option><option value="acelerado (taquipsiquismo)">acelerado</option><option value="lentificado (bradipsiquismo)">lentificado</option><option value="fuga de idéias">fuga de idéias</option><option value="bloqueio">bloqueio</option><option value="prolixidade">prolixidade</option></select></div>
+            <!-- conteúdo do pensamento -->
+            <div><label>💭 Conteúdo:</label> <select id="conteudo"><option value="sem ideação delirante">sem delirios</option><option value="delírio persecutório">persecutório</option><option value="delírio de grandeza">grandeza</option><option value="delírio de referência">referência</option><option value="ideação suicida">ideação suicida</option><option value="obsessões">obsessões</option><option value="hipocondríaco">hipocondríaco</option></select></div>
+            <!-- linguagem -->
+            <div><label>🗣️ Linguagem:</label> <select id="linguagem"><option value="fluente, articulada">fluente</option><option value="logorreia">logorreia</option><option value="mutismo">mutismo</option><option value="ecolalia">ecolalia</option><option value="neologismos">neologismos</option><option value="bradilalia">bradilalia</option></select></div>
+            <!-- psicomotricidade/conduta -->
+            <div><label>🏃 Psicomotricidade:</label> <select id="psicomotricidade"><option value="normal">normal</option><option value="agitado (hiperatividade)">agitado</option><option value="lentificado (hipoatividade)">lentificado</option><option value="maneirismos/estereotipias">estereotipias</option><option value="flexibilidade cérea">flexibilidade cérea</option></select></div>
+            <!-- vontade -->
+            <div><label>⚖️ Vontade:</label> <select id="vontade"><option value="normobulia">normobulia</option><option value="hipobulia">hipobulia</option><option value="abulia">abulia</option><option value="hiperbulia">hiperbulia</option></select></div>
+            <!-- juízo crítico -->
+            <div><label>🔎 Juízo crítico:</label> <select id="juizo"><option value="preservado">preservado</option><option value="parcialmente preservado">parcialmente preservado</option><option value="prejudicado (insight ausente)">prejudicado</option></select></div>
+        </div>
+    </div>
+
+    <!-- Botões: gerar HDA + conduta automática + cópia -->
+    <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;">
+        <button class="btn" id="gerarHDA">📄 GERAR HDA e CONDUTA automáticos</button>
+        <button class="btn btn-secondary" id="copiarTexto">📋 COPIAR EVOLUÇÃO</button>
+        <span style="color:#1d5a7a;">* a HDA será construída com base nas seleções</span>
+    </div>
+
+    <!-- OUTPUT FINAL (HDA + exame + conduta) -->
+    <div class="output-box" id="outputFinal">
+        Clique em "GERAR HDA" para criar o texto estruturado.
+    </div>
+
+    <!-- observações e referência rápida -->
+    <div class="footer-notes">
+        ⚡ Baseado em: MEEM (anexo), Psicopatologia (Maristela Sousa), modelo Anchyses Jobim, CASOMI APEJUCOL. <br>
+        Classificação IMC (OMS) · conduta gerada conforme pontuação MEEM e gravidade psicopatológica.
+    </div>
+</div>
+
+<script>
+    (function() {
+        // helpers
+        const imcCalc = () => {
+            const peso = parseFloat(document.getElementById('peso').value) || 0;
+            const altura = parseFloat(document.getElementById('altura').value) || 1;
+            if (peso <= 0 || altura <= 0.5) return { imc: 0, class: 'Inválido' };
+            const imc = peso / (altura * altura);
+            let classe = '';
+            if (imc < 18.5) classe = 'Abaixo do peso';
+            else if (imc < 25) classe = 'Peso normal';
+            else if (imc < 30) classe = 'Sobrepeso';
+            else if (imc < 35) classe = 'Obesidade grau I';
+            else if (imc < 40) classe = 'Obesidade grau II';
+            else classe = 'Obesidade grau III';
+            return { imc: imc.toFixed(1), class: classe };
+        };
+
+        const atualizarIMC = () => {
+            const res = imcCalc();
+            document.getElementById('imc').value = res.imc;
+            document.getElementById('classIMC').value = res.class;
+        };
+        document.getElementById('calcIMC').addEventListener('click', atualizarIMC);
+        atualizarIMC(); // inicial
+
+        // MEEM total
+        const meemSelects = document.querySelectorAll('.meem');
+        function calcMEEM() {
+            let total = 0;
+            meemSelects.forEach(sel => { total += parseInt(sel.value || 0); });
+            document.getElementById('meemValor').innerText = total;
+            document.getElementById('meemTotal').innerText = total;
+            return total;
+        }
+        meemSelects.forEach(s => s.addEventListener('change', calcMEEM));
+        calcMEEM();
+
+        // principal gerador HDA + conduta
+        document.getElementById('gerarHDA').addEventListener('click', function() {
+            const sexo = document.getElementById('sexo').value;
+            const idade = document.getElementById('idade').value;
+            const imc = document.getElementById('imc').value;
+            const classeImc = document.getElementById('classIMC').value;
+
+            // mneumônico CASOMI + APEJUCOL (extraído dos selects)
+            const consc = document.getElementById('consciencia').value;
+            const atenc = document.getElementById('atencao').value;
+            const orient = document.getElementById('orientacao').value;
+            const mem = document.getElementById('memoria').value;
+            const intel = document.getElementById('inteligencia').value;
+            const sens = document.getElementById('sensopercepcao').value;
+
+            const afet = document.getElementById('afeto').value;
+            const pensCurso = document.getElementById('pensamentoCurso').value;
+            const conteudoPens = document.getElementById('conteudo').value;
+            // juízo
+            const juizo = document.getElementById('juizo').value;
+            // conduta psicomotricidade
+            const psicomot = document.getElementById('psicomotricidade').value;
+            const vont = document.getElementById('vontade').value;
+            const ling = document.getElementById('linguagem').value;
+            const meemTotal = parseInt(document.getElementById('meemValor').innerText);
+
+            // construção da HDA (frases automáticas baseadas nas escolhas)
+            let hda = `HISTÓRIA DA DOENÇA ATUAL (gerada automaticamente):\n`;
+            hda += `Paciente ${sexo}, ${idade} anos, IMC=${imc} (${classeImc}).\n`;
+            hda += `Queixa principal referida conforme avaliado. O quadro evoluiu com `;
+
+            // sintomas baseado em sensopercepção/psicomotricidade/afeto
+            if (sens.includes('alucinação')) hda += `relato de ${sens}, `;
+            if (conteudoPens.includes('delírio') || conteudoPens.includes('persecut') || conteudoPens.includes('grandeza')) hda += `ideação ${conteudoPens}, `;
+            if (afet.includes('depress')) hda += `humor depressivo, `;
+            if (afet.includes('eufórico') || afet.includes('hipertímico')) hda += `humor exaltado, `;
+            if (pensCurso.includes('acelerado') || pensCurso.includes('fuga')) hda += `pensamento acelerado (${pensCurso}), `;
+            if (pensCurso.includes('lentif')) hda += `lentificação psíquica, `;
+            if (psicomot.includes('agitado')) hda += `agitação psicomotora, `;
+            if (psicomot.includes('lentificado')) hda += `hipoatividade motora, `;
+            if (mem.includes('hipomnésia') || mem.includes('amnésia')) hda += `com evidências de ${mem}, `;
+            if (ling.includes('logor')) hda += `logorreia, `;
+            if (ling.includes('mutismo')) hda += `mutismo, `;
+            hda = hda.replace(/, $/, '') + '.\n';
+
+            hda += `Apresenta MEEM=${meemTotal}/30. `;
+            if (meemTotal < 24) hda += `(pontuação sugestiva de declínio cognitivo). `;
+            else hda += `(sem alterações cognitivas significativas). `;
+
+            // EXAME PSÍQUICO detalhado
+            let exame = `\nEXAME PSÍQUICO (observação):\n`;
+            exame += `▶ Consciência: ${consc}. | Atenção: ${atenc}. | Orientação: ${orient}.\n`;
+            exame += `▶ Memória: ${mem}. | Inteligência: ${intel}. | Sensopercepção: ${sens}.\n`;
+            exame += `▶ Afeto/humor: ${afet}. | Pensamento (curso): ${pensCurso}. | Conteúdo: ${conteudoPens}.\n`;
+            exame += `▶ Linguagem: ${ling}. | Psicomotricidade: ${psicomot}. | Vontade: ${vont}. | Juízo crítico: ${juizo}.\n`;
+
+            // CONDUTA automática baseada em gravidade
+            let conduta = `\nCONDUTA / PLANO TERAPÊUTICO (automática):\n`;
+            if (conteudoPens.includes('suicida') || conteudoPens.includes('homicida')) conduta += '🚨 Risco de auto/heteroagressão. Encaminhamento para avaliação de risco imediato. ';
+            if (sens.includes('alucinação') && !juizo.includes('preservado')) conduta += 'Sintomas psicóticos ativos. Considerar ajuste de antipsicótico. ';
+            if (afet.includes('depress') && meemTotal < 28) conduta += 'Hipotimia significativa. Avaliar introdução/otimização de antidepressivo + suporte psicológico. ';
+            if (afet.includes('eufórico') || pensCurso.includes('acelerado')) conduta += 'Quadro compatível com ativação maniforme. Estabilizador de humor / neuroléptico. ';
+            if (mem.includes('hipomnésia') || mem.includes('amnésia') || meemTotal < 24) conduta += 'Necessário investigar causa de declínio cognitivo: exames de imagem, laboratório. ';
+            if (psicomot.includes('estereo') || psicomot.includes('flexibilidade')) conduta += 'Sinais catatônicos. Avaliar escala de catatonia. ';
+            conduta += '\n▶ Conduta geral: acolhimento, psicoeducação, agendar retorno em 2 semanas. Notificar equipe multiprofissional.';
+
+            if (conduta.length < 80) conduta += '\n▶ Manter suporte, reavaliar em consulta.';
+
+            const textoFinal = hda + exame + conduta;
+            document.getElementById('outputFinal').innerText = textoFinal;
+        });
+
+        // copiar
+        document.getElementById('copiarTexto').addEventListener('click', function() {
+            const texto = document.getElementById('outputFinal').innerText;
+            navigator.clipboard.writeText(texto).then(() => {
+                alert('✅ Texto copiado para a área de transferência!');
+            }).catch(() => alert('❌ Erro ao copiar, selecione manualmente.'));
+        });
+
+        // sincronizar MEEM ao iniciar
+        calcMEEM();
+    })();
+</script>
+</body>
+      </html>
