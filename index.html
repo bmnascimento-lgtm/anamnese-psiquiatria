@@ -3,77 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📋 Avaliação Psiquiátrica · CAPS / Ambulatório</title>
+    <title>🧠 Avaliação Psiquiátrica · CAPS (ambulatório)</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background: #e6f0f7;
-            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
-            padding: 1.8rem;
-            color: #0d2b3e;
+            background: #e2eef7;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 1.5rem;
+            color: #10344a;
         }
         .container {
-            max-width: 1500px;
+            max-width: 1600px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             gap: 1.8rem;
         }
-        h1 { font-size: 2.4rem; font-weight: 500; border-bottom: 4px solid #2b7aa2; padding-bottom: 0.5rem; color: #07405c; letter-spacing: -0.5px; }
-        h2 { font-size: 1.6rem; margin: 0.5rem 0 0.5rem; color: #155e87; border-left: 6px solid #3f98c9; padding-left: 1rem; background: linear-gradient(to right, #f1f9ff, transparent);}
-        h3 { font-size: 1.2rem; margin: 1.2rem 0 0.4rem; color: #1c5777; display: flex; align-items: center; gap: 0.6rem; }
+        h1 { font-size: 2.2rem; font-weight: 500; border-bottom: 4px solid #1e6f9c; padding-bottom: 0.4rem; color: #043a54; }
+        h2 { font-size: 1.5rem; margin: 0.2rem 0 0.8rem; color: #105e83; border-left: 6px solid #3089c2; padding-left: 1rem; background: #f0f9ff; }
         .card {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(2px);
+            background: #ffffffd9;
+            backdrop-filter: blur(3px);
             border-radius: 28px;
-            padding: 1.8rem 2.2rem;
-            box-shadow: 0 20px 35px -5px rgba(2,65,100,0.25);
-            border: 1px solid rgba(60,150,210,0.25);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 18px 30px -8px #1f4f6e80;
+            border: 1px solid #a6cfed;
         }
         .flex-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.8rem;
-            align-items: center;
+            gap: 1.5rem;
+            align-items: flex-end;
         }
         .input-group {
             display: flex;
             flex-direction: column;
-            min-width: 160px;
+            min-width: 140px;
         }
-        .input-group label, .label-mini {
+        .input-group label, .field-label {
             font-weight: 700;
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.6px;
-            color: #1b6385;
+            letter-spacing: 0.4px;
+            color: #195e83;
             margin-bottom: 0.2rem;
         }
         .input-group input, .input-group select, .input-group textarea {
             padding: 0.7rem 1rem;
-            border: 1.5px solid #c1ddef;
-            border-radius: 30px;
-            font-size: 0.95rem;
+            border: 1.5px solid #c3ddef;
+            border-radius: 40px;
+            font-size: 0.9rem;
             background: white;
-            transition: 0.2s;
-            font-family: inherit;
+            transition: 0.15s;
         }
         .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
-            border-color: #1f88c2;
-            box-shadow: 0 0 0 4px rgba(28,124,184,0.2);
+            border-color: #1a83c0;
+            box-shadow: 0 0 0 4px #1783ca30;
             outline: none;
         }
-        textarea { min-height: 70px; resize: vertical; }
-        .inline-label { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
-        .badge {
-            background: #daeefb;
-            padding: 0.3rem 1.3rem;
-            border-radius: 40px;
-            font-weight: 600;
-            color: #035e8f;
+        textarea { min-height: 65px; resize: vertical; border-radius: 24px !important; }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 0.5rem 0 1rem;
+        }
+        .med-row {
+            background: #ebf6fe;
+            border-radius: 28px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            align-items: flex-end;
+        }
+        .mini-input {
+            display: flex;
+            flex-direction: column;
+            min-width: 140px;
         }
         .btn {
-            background: #1d78a3;
+            background: #1f77a3;
             border: none;
             color: white;
             font-weight: 600;
@@ -81,190 +92,177 @@
             border-radius: 60px;
             font-size: 1rem;
             cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 6px 12px rgba(10,80,120,0.3);
-            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 6px 12px #0e4b6e5e;
+            transition: 0.15s;
+            border: 1px solid #c3e2ff;
         }
-        .btn:hover {
-            background: #0b5d86;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 20px rgba(0,50,80,0.3);
-        }
-        .btn-copy { background: #2a7555; float: right; }
-        .table-meem {
+        .btn:hover { background: #0c5c86; transform: scale(1.02); }
+        .btn-copy { background: #286f55; float: right; }
+        .meem-tbl {
             width: 100%;
             border-collapse: collapse;
-            background: #f0f8ff;
+            background: #f1fafd;
             border-radius: 24px;
             overflow: hidden;
-            margin: 1.2rem 0;
         }
-        .table-meem th { background: #b8dbf2; padding: 0.9rem; font-weight: 700; }
-        .table-meem td { padding: 0.7rem 1rem; border-bottom: 1px solid #cbdef0; }
-        .table-meem select { padding: 0.3rem 1rem; border-radius: 30px; border: 1px solid #8cb3d1; }
+        .meem-tbl th { background: #b5d8f0; padding: 0.8rem; }
+        .meem-tbl td { padding: 0.6rem 1rem; border-bottom: 1px solid #bed9f0; }
+        .meem-tbl select { padding: 0.3rem 1rem; border-radius: 40px; border: 1px solid #6fa9d1; }
         .output-box {
-            background: #0d2a35;
-            color: #e1f2fc;
+            background: #0e2b36;
+            color: #e0f3ff;
             padding: 1.8rem 2.2rem;
             border-radius: 32px;
             font-family: 'JetBrains Mono', 'Courier New', monospace;
             font-size: 0.9rem;
             white-space: pre-wrap;
-            border: 2px solid #256f94;
-            max-height: 450px;
-            overflow: auto;
-            box-shadow: inset 0 0 18px #00000050;
+            border: 2px solid #3483aa;
+            max-height: 440px;
+            overflow-y: auto;
         }
-        .grid-2c {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 1.8rem;
-            margin: 0.5rem 0;
+        .badge-imc {
+            background: #c7e2fa;
+            padding: 0.3rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
         }
-        .medicamento-item {
-            background: #e8f3fd;
-            border-radius: 24px;
-            padding: 1rem 1.5rem;
-            margin-bottom: 0.8rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: flex-end;
-        }
-        .inline-input { display: flex; flex-direction: column; min-width: 130px; }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>🧠 EXAME PSÍQUICO · CAPS (anamnese integrada)</h1>
+    <h1>🧠 EXAME PSÍQUICO · CAPS (anamnese completa)</h1>
 
-    <!-- ############# PRIMEIRA PARTE: QD + SEXO/IDADE/IMC ############# -->
+    <!-- ########## 1. IDENTIFICAÇÃO + QD + IMC automático ########## -->
     <div class="card">
-        <h2>📌 1. Identificação e queixa</h2>
+        <h2>📌 1. Identificação e queixa principal</h2>
         <div class="flex-row">
             <div class="input-group"><label>Sexo</label>
-                <select id="sexo"><option value="feminino">Feminino</option><option value="masculino">Masculino</option><option value="outro">Outro</option></select>
+                <select id="sexo">
+                    <option value="" selected disabled>— selecione —</option>
+                    <option value="feminino">Feminino</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="outro">Outro</option>
+                </select>
             </div>
-            <div class="input-group"><label>Idade (anos)</label><input type="number" id="idade" value="42" min="0" max="120"></div>
-            <div class="input-group"><label>Peso (kg)</label><input type="number" id="peso" step="0.1" value="68.5" min="20" max="250"></div>
-            <div class="input-group"><label>Altura (m)</label><input type="number" id="altura" step="0.01" value="1.68" min="1.0" max="2.5"></div>
-            <div class="input-group"><label>IMC (automático)</label><input type="text" id="imc" readonly value="24.3"></div>
-            <div class="input-group"><label>Classificação IMC</label><input type="text" id="classIMC" readonly value="Peso normal"></div>
+            <div class="input-group"><label>Idade (anos)</label><input type="number" id="idade" value="" placeholder="ex: 38"></div>
+            <div class="input-group"><label>Peso (kg)</label><input type="number" id="peso" step="0.1" placeholder="ex: 72.5"></div>
+            <div class="input-group"><label>Altura (m)</label><input type="number" id="altura" step="0.01" placeholder="ex: 1.70"></div>
+            <div class="input-group"><label>IMC (autom.)</label><input type="text" id="imc" readonly placeholder="--"></div>
+            <div class="input-group"><label>Classif. IMC</label><input type="text" id="classIMC" readonly placeholder="--"></div>
         </div>
-        <div class="input-group" style="margin-top:1.2rem; width:100%;">
-            <label>📝 QUEIXA PRINCIPAL (QD) / motivo da consulta:</label>
-            <textarea id="queixaPrincipal" placeholder="Ex.: 'tristeza profunda, falta de vontade, insônia' ...">tristeza, desânimo, ideias de morte</textarea>
+        <div style="margin-top: 1.2rem;">
+            <label class="field-label">📝 Queixa principal (QD):</label>
+            <textarea id="queixaPrincipal" placeholder="Ex.: 'escuto vozes', 'tristeza o tempo todo'..."></textarea>
         </div>
     </div>
 
-    <!-- ############# ANTECEDENTES PESSOAIS / FAMILIARES / COMORBIDADES ############# -->
+    <!-- ########## 2. ANTECEDENTES ########## -->
     <div class="card">
-        <h2>📋 2. Antecedentes · História pessoal e familiar</h2>
-        <div class="grid-2c">
-            <div>
-                <label class="label-mini">Antecedentes pessoais (desenvolvimento, infância, trauma)</label>
-                <textarea id="antePessoais" placeholder="ex.: nascimento normal, marcos do desenvolvimento adequados, sem trauma">desenvolvimento normal, nega abuso</textarea>
+        <h2>📋 2. Antecedentes pessoais, familiares, comorbidades</h2>
+        <div class="grid-2">
+            <div><label class="field-label">Antecedentes pessoais (infância, desenvolvimento, traumas)</label>
+                <textarea id="antePessoais" placeholder="ex.: nascimento normal, abuso na infância..."></textarea>
             </div>
-            <div>
-                <label class="label-mini">Antecedentes familiares (transtornos mentais, suicídio)</label>
-                <textarea id="anteFamiliares" placeholder="pai alcoolista, mãe com depressão">mãe com depressão recorrente; irmã tentou suicídio</textarea>
+            <div><label class="field-label">Antecedentes familiares (transtornos mentais, suicídio)</label>
+                <textarea id="anteFamiliares" placeholder="ex.: mãe depressão, irmão alcoolista"></textarea>
             </div>
         </div>
-        <div style="margin-top:1.2rem">
-            <label class="label-mini">🧾 Comorbidades clínicas ( HAS, DM, epilepsia ... )</label>
-            <textarea id="comorbidades" placeholder="hipertensão, hipotireoidismo...">HAS, diabetes tipo 2</textarea>
+        <div style="margin-top:0.8rem">
+            <label class="field-label">🧾 Comorbidades clínicas (HAS, DM, epilepsia, etc.)</label>
+            <textarea id="comorbidades" placeholder="ex.: hipertensão, hipotireoidismo"></textarea>
         </div>
     </div>
 
-    <!-- ############# MEDICAMENTOS + TERAPIA ############# -->
+    <!-- ########## 3. MEDICAÇÕES + TERAPIA ########## -->
     <div class="card">
         <h2>💊 3. Medicações em uso e psicoterapia</h2>
-        <div id="medicamentosContainer">
-            <!-- modelo de linha de medicamento será inserido via js, mas deixaremos fixo um exemplo e um extra -->
+        <!-- medicamento 1 -->
+        <div class="med-row">
+            <div class="mini-input"><label>Nome (med 1)</label><input type="text" id="medNome1" placeholder="ex.: sertralina"></div>
+            <div class="mini-input"><label>Dose</label><input type="text" id="medDose1" placeholder="50mg/dia"></div>
+            <div class="mini-input"><label>Tempo uso</label><input type="text" id="medTempo1" placeholder="ex.: 3 meses"></div>
+            <div class="mini-input"><label>Indicação</label><input type="text" id="medInd1" placeholder="depressão"></div>
         </div>
-        <div class="medicamento-item" id="medRow1">
-            <div class="inline-input"><label>Nome (med 1)</label><input type="text" id="medNome1" value="Sertralina"></div>
-            <div class="inline-input"><label>Dose</label><input type="text" id="medDose1" value="50mg/dia"></div>
-            <div class="inline-input"><label>Tempo uso</label><input type="text" id="medTempo1" value="6 meses"></div>
-            <div class="inline-input"><label>Indicação</label><input type="text" id="medInd1" value="depressão"></div>
+        <!-- medicamento 2 -->
+        <div class="med-row">
+            <div class="mini-input"><label>Nome (med 2)</label><input type="text" id="medNome2" placeholder="ex.: losartana"></div>
+            <div class="mini-input"><label>Dose</label><input type="text" id="medDose2" placeholder="50mg/dia"></div>
+            <div class="mini-input"><label>Tempo uso</label><input type="text" id="medTempo2" placeholder="ex.: 1 ano"></div>
+            <div class="mini-input"><label>Indicação</label><input type="text" id="medInd2" placeholder="HAS"></div>
         </div>
-        <div class="medicamento-item" id="medRow2">
-            <div class="inline-input"><label>Nome (med 2)</label><input type="text" id="medNome2" value="Losartana"></div>
-            <div class="inline-input"><label>Dose</label><input type="text" id="medDose2" value="50mg/dia"></div>
-            <div class="inline-input"><label>Tempo uso</label><input type="text" id="medTempo2" value="2 anos"></div>
-            <div class="inline-input"><label>Indicação</label><input type="text" id="medInd2" value="HAS"></div>
-        </div>
-        <div style="margin: 1rem 0 0.5rem;">
-            <label class="label-mini">🧘 Acompanhamento psicoterápico?</label>
+        <!-- terapia -->
+        <div style="margin-top:0.8rem;">
+            <label class="field-label">🧘 Acompanhamento psicoterápico:</label>
             <select id="terapiaSelect">
+                <option value="" selected disabled>— selecione —</option>
                 <option value="não faz terapia">não faz terapia</option>
                 <option value="psicoterapia semanal (psicanálise)">psicoterapia semanal (psicanálise)</option>
-                <option value="psicoterapia cognitivo-comportamental">TCC</option>
+                <option value="psicoterapia TCC">TCC</option>
                 <option value="grupo de apoio CAPS">grupo de apoio CAPS</option>
                 <option value="outro">outro</option>
             </select>
         </div>
     </div>
 
-    <!-- ############# MINI-EXAME ESTADO MENTAL (CORRIGIDO) ############# -->
+    <!-- ########## 4. MEEM – sem placeholders, tudo numérico fixo ########## -->
     <div class="card">
-        <h2>🧩 4. MEEM (Mini-Exame do Estado Mental)  Total: <span id="meemTotalDisplay">0</span>/30</h2>
-        <table class="table-meem">
+        <h2>🧩 4. Mini-Exame do Estado Mental (MEEM)  total: <span id="meemTotalDisplay">0</span>/30</h2>
+        <table class="meem-tbl">
             <tr><th>Item</th><th>Pontuação</th></tr>
-            <tr><td>Orientação temporal (ano, estaç, dia, mês, dia mês) 0-5</td><td><select id="meem1" class="meem">${[0,1,2,3,4,5].map(i=>`<option value="${i}">${i}</option>`).join('')}</select></td></tr>
-            <tr><td>Orientação espacial (país, estado, cidade, local, andar) 0-5</td><td><select id="meem2" class="meem">${[0,1,2,3,4,5].map(i=>`<option value="${i}">${i}</option>`).join('')}</select></td></tr>
-            <tr><td>Registro (pente, rua, azul) 0-3</td><td><select id="meem3" class="meem">${[0,1,2,3].map(i=>`<option value="${i}">${i}</option>`).join('')}</select></td></tr>
-            <tr><td>Atenção/cálculo (100-7 ou série) 0-5</td><td><select id="meem4" class="meem">${[0,1,2,3,4,5].map(i=>`<option value="${i}">${i}</option>`).join('')}</select></td></tr>
-            <tr><td>Evocação (3 palavras) 0-3</td><td><select id="meem5" class="meem">${[0,1,2,3].map(i=>`<option value="${i}">${i}</option>`).join('')}</select></td></tr>
-            <tr><td>Linguagem: nomear lápis/relógio 0-2</td><td><select id="meem6" class="meem">${[0,1,2].map(i=>`<option value="${i}">${i}</option>`).join('')}</select></td></tr>
-            <tr><td>Repetir "nem aqui, nem ali, nem lá" 0-1</td><td><select id="meem7" class="meem"><option value="0">0</option><option value="1" selected>1</option></select></td></tr>
-            <tr><td>Comando três estágios (pegar/dobrar/chão) 0-3</td><td><select id="meem8" class="meem">${[0,1,2,3].map(i=>`<option value="${i}">${i}</option>`).join('')}</select></td></tr>
-            <tr><td>Ler e executar "FECHE OS OLHOS" 0-1</td><td><select id="meem9" class="meem"><option value="0">0</option><option value="1">1</option></select></td></tr>
-            <tr><td>Escrever uma frase 0-1</td><td><select id="meem10" class="meem"><option value="0">0</option><option value="1">1</option></select></td></tr>
-            <tr><td>Copiar desenho 0-1</td><td><select id="meem11" class="meem"><option value="0">0</option><option value="1">1</option></select></td></tr>
+            <tr><td>Orientação temporal (ano, estaç, dia, mês, dia mês) 0-5</td><td><select id="meem1" class="meem"> <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option> </select></td></tr>
+            <tr><td>Orientação espacial (país, estado, cidade, local, andar) 0-5</td><td><select id="meem2" class="meem"> <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option> </select></td></tr>
+            <tr><td>Registro (pente, rua, azul) 0-3</td><td><select id="meem3" class="meem"> <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option> </select></td></tr>
+            <tr><td>Atenção/cálculo (100-7 ou série) 0-5</td><td><select id="meem4" class="meem"> <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option> </select></td></tr>
+            <tr><td>Evocação (3 palavras) 0-3</td><td><select id="meem5" class="meem"> <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option> </select></td></tr>
+            <tr><td>Linguagem: nomear lápis/relógio 0-2</td><td><select id="meem6" class="meem"> <option value="0">0</option><option value="1">1</option><option value="2">2</option> </select></td></tr>
+            <tr><td>Repetir "nem aqui, nem ali, nem lá" 0-1</td><td><select id="meem7" class="meem"> <option value="0">0</option><option value="1">1</option> </select></td></tr>
+            <tr><td>Comando três estágios (pegar/dobrar/chão) 0-3</td><td><select id="meem8" class="meem"> <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option> </select></td></tr>
+            <tr><td>Ler e executar "FECHE OS OLHOS" 0-1</td><td><select id="meem9" class="meem"> <option value="0">0</option><option value="1">1</option> </select></td></tr>
+            <tr><td>Escrever uma frase 0-1</td><td><select id="meem10" class="meem"> <option value="0">0</option><option value="1">1</option> </select></td></tr>
+            <tr><td>Copiar desenho 0-1</td><td><select id="meem11" class="meem"> <option value="0">0</option><option value="1">1</option> </select></td></tr>
         </table>
     </div>
 
-    <!-- ############# FUNÇÕES PSÍQUICAS (APEJUCOL) ############# -->
+    <!-- ########## 5. EXAME PSÍQUICO (APEJUCOL) ########## -->
     <div class="card">
-        <h2>🔎 5. Exame psíquico (selecionar itens)</h2>
-        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1.2rem;">
-            <div><label>Consciência</label> <select id="consciencia"><option value="lúcido">lúcido</option><option value="obnubilado">obnubilado</option><option value="sonolento">sonolento</option><option value="torporoso">torporoso</option><option value="delirium">delirium</option></select></div>
-            <div><label>Atenção</label> <select id="atencao"><option value="normoprosexia">normoprosexia</option><option value="hipoprosexia">hipoprosexia</option><option value="hiperprosexia">hiperprosexia</option><option value="distração">distração</option><option value="disprosexia">disprosexia</option></select></div>
-            <div><label>Orientação</label> <select id="orientacao"><option value="orientado auto e alopsiquicamente">orientado</option><option value="desorientado temporal">desorientado temporal</option><option value="desorientado espacial">desorientado espacial</option><option value="desorientação amnésica">desorientação amnésica</option></select></div>
-            <div><label>Memória</label> <select id="memoria"><option value="preservada">preservada</option><option value="hipomnésia anterógrada">hipomnésia anterógrada</option><option value="amnésia retrógrada">amnésia retrógrada</option><option value="confabulação">confabulação</option></select></div>
-            <div><label>Inteligência</label> <select id="inteligencia"><option value="dentro da média">dentro da média</option><option value="inferior à média">inferior</option><option value="deficit moderado">déficit moderado</option></select></div>
-            <div><label>Sensopercepção</label> <select id="sensopercepcao"><option value="sem alterações">sem alterações</option><option value="alucinação auditiva">alucinação auditiva</option><option value="alucinação visual">alucinação visual</option><option value="ilusão">ilusão</option><option value="desrealização">desrealização</option></select></div>
-            <div><label>Afeto/humor</label> <select id="afeto"><option value="eutímico">eutímico</option><option value="depressivo">depressivo</option><option value="ansioso">ansioso</option><option value="eufórico">eufórico</option><option value="embotado">embotado</option><option value="irritável">irritável</option></select></div>
-            <div><label>Pensamento (curso)</label> <select id="pensamentoCurso"><option value="regular">regular</option><option value="acelerado (taquipsiquismo)">acelerado</option><option value="lentificado">lentificado</option><option value="fuga de idéias">fuga de idéias</option><option value="bloqueio">bloqueio</option></select></div>
-            <div><label>Conteúdo pensamento</label> <select id="conteudo"><option value="sem delírios">sem delírios</option><option value="delírio persecutório">persecutório</option><option value="delírio de grandeza">grandeza</option><option value="ideação suicida">ideação suicida</option><option value="obsessões">obsessões</option></select></div>
-            <div><label>Linguagem</label> <select id="linguagem"><option value="fluente">fluente</option><option value="logorreia">logorreia</option><option value="mutismo">mutismo</option><option value="ecolalia">ecolalia</option><option value="neologismos">neologismos</option></select></div>
-            <div><label>Psicomotricidade</label> <select id="psicomotricidade"><option value="normal">normal</option><option value="agitado">agitado</option><option value="lentificado">lentificado</option><option value="estereotipias">estereotipias</option></select></div>
-            <div><label>Vontade</label> <select id="vontade"><option value="normobulia">normobulia</option><option value="hipobulia">hipobulia</option><option value="abulia">abulia</option></select></div>
-            <div><label>Juízo crítico</label> <select id="juizo"><option value="preservado">preservado</option><option value="parcial">parcial</option><option value="prejudicado">prejudicado</option></select></div>
+        <h2>🔎 5. Exame psíquico detalhado</h2>
+        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1.2rem;">
+            <div><label>Consciência</label> <select id="consciencia"><option value="" selected>--</option><option value="lúcido">lúcido</option><option value="obnubilado">obnubilado</option><option value="sonolento">sonolento</option><option value="torporoso">torporoso</option><option value="delirium">delirium</option></select></div>
+            <div><label>Atenção</label> <select id="atencao"><option value="" selected>--</option><option value="normoprosexia">normoprosexia</option><option value="hipoprosexia">hipoprosexia</option><option value="hiperprosexia">hiperprosexia</option><option value="distração">distração</option></select></div>
+            <div><label>Orientação</label> <select id="orientacao"><option value="" selected>--</option><option value="orientado auto e alopsiquicamente">orientado</option><option value="desorientado temporal">desorientado temporal</option><option value="desorientado espacial">desorientado espacial</option></select></div>
+            <div><label>Memória</label> <select id="memoria"><option value="" selected>--</option><option value="preservada">preservada</option><option value="hipomnésia anterógrada">hipomnésia anterógrada</option><option value="amnésia retrógrada">amnésia retrógrada</option><option value="confabulação">confabulação</option></select></div>
+            <div><label>Inteligência</label> <select id="inteligencia"><option value="" selected>--</option><option value="dentro da média">dentro da média</option><option value="inferior à média">inferior</option><option value="deficit moderado">déficit moderado</option></select></div>
+            <div><label>Sensopercepção</label> <select id="sensopercepcao"><option value="" selected>--</option><option value="sem alterações">sem alterações</option><option value="alucinação auditiva">alucinação auditiva</option><option value="alucinação visual">alucinação visual</option><option value="ilusão">ilusão</option></select></div>
+            <div><label>Afeto/humor</label> <select id="afeto"><option value="" selected>--</option><option value="eutímico">eutímico</option><option value="depressivo">depressivo</option><option value="ansioso">ansioso</option><option value="eufórico">eufórico</option><option value="embotado">embotado</option></select></div>
+            <div><label>Pensamento (curso)</label> <select id="pensamentoCurso"><option value="" selected>--</option><option value="regular">regular</option><option value="acelerado (taquipsiquismo)">acelerado</option><option value="lentificado">lentificado</option><option value="fuga de idéias">fuga de idéias</option></select></div>
+            <div><label>Conteúdo pensamento</label> <select id="conteudo"><option value="" selected>--</option><option value="sem delírios">sem delírios</option><option value="delírio persecutório">persecutório</option><option value="delírio de grandeza">grandeza</option><option value="ideação suicida">ideação suicida</option><option value="obsessões">obsessões</option></select></div>
+            <div><label>Linguagem</label> <select id="linguagem"><option value="" selected>--</option><option value="fluente">fluente</option><option value="logorreia">logorreia</option><option value="mutismo">mutismo</option><option value="ecolalia">ecolalia</option></select></div>
+            <div><label>Psicomotricidade</label> <select id="psicomotricidade"><option value="" selected>--</option><option value="normal">normal</option><option value="agitado">agitado</option><option value="lentificado">lentificado</option><option value="estereotipias">estereotipias</option></select></div>
+            <div><label>Vontade</label> <select id="vontade"><option value="" selected>--</option><option value="normobulia">normobulia</option><option value="hipobulia">hipobulia</option><option value="abulia">abulia</option></select></div>
+            <div><label>Juízo crítico</label> <select id="juizo"><option value="" selected>--</option><option value="preservado">preservado</option><option value="parcial">parcial</option><option value="prejudicado">prejudicado</option></select></div>
         </div>
     </div>
 
-    <!-- ############# GERADOR E OUTPUT ############# -->
+    <!-- ########## BOTÕES E OUTPUT ########## -->
     <div style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
         <button class="btn" id="gerarHDA">📄 GERAR HDA + CONDUTA</button>
         <button class="btn btn-copy" id="copiarTexto">📋 COPIAR EVOLUÇÃO</button>
     </div>
     <div class="output-box" id="outputFinal">
-        Pressione o botão para gerar o texto com base nos campos preenchidos.
+        Preencha os campos e clique em "GERAR HDA" para produzir o texto.
     </div>
-    <div class="footer-notes">
-        * IMC automático; QD, antecedentes, comorbidades, medicações (2 linhas) e terapia inclusos. MEEM sem placeholders.
+    <div style="color: #1f5c7a; font-size: 0.85rem; border-top: 1px dashed #4f96c3; padding-top: 0.8rem;">
+        ⚡ IMC automático. Todos os campos iniciados em branco. MEEM sem placeholders.
     </div>
 </div>
 
 <script>
     (function() {
-        // ---------- FUNÇÃO IMC AUTOMÁTICO ----------
+        // IMC automático com inputs vazios
         function updateIMC() {
-            const peso = parseFloat(document.getElementById('peso').value) || 0;
-            const altura = parseFloat(document.getElementById('altura').value) || 1;
-            if (peso <= 0 || altura < 0.5) {
+            const peso = parseFloat(document.getElementById('peso').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+            if (isNaN(peso) || isNaN(altura) || peso <= 0 || altura < 0.5) {
                 document.getElementById('imc').value = '';
                 document.getElementById('classIMC').value = '';
                 return;
@@ -280,86 +278,86 @@
             document.getElementById('imc').value = imc.toFixed(1);
             document.getElementById('classIMC').value = classe;
         }
-        ['peso','altura'].forEach(id => document.getElementById(id).addEventListener('input', updateIMC));
-        updateIMC();
+        document.getElementById('peso')?.addEventListener('input', updateIMC);
+        document.getElementById('altura')?.addEventListener('input', updateIMC);
 
-        // ---------- MEEM total ----------
+        // MEEM total
         const meemSelects = document.querySelectorAll('.meem');
         function calcMEEM() {
             let total = 0;
-            meemSelects.forEach(sel => { total += parseInt(sel.value || 0); });
+            meemSelects.forEach(sel => { total += parseInt(sel.value) || 0; });
             document.getElementById('meemTotalDisplay').innerText = total;
             return total;
         }
         meemSelects.forEach(s => s.addEventListener('change', calcMEEM));
         calcMEEM();
 
-        // ---------- GERAR HDA + CONDUTA ----------
+        // Gerar HDA e conduta
         document.getElementById('gerarHDA').addEventListener('click', function() {
-            const sexo = document.getElementById('sexo').value;
-            const idade = document.getElementById('idade').value;
-            const imc = document.getElementById('imc').value;
-            const classeImc = document.getElementById('classIMC').value;
-            const qd = document.getElementById('queixaPrincipal').value.trim() || 'não informada';
+            const sexo = document.getElementById('sexo').value || 'não informado';
+            const idade = document.getElementById('idade').value || '?';
+            const imc = document.getElementById('imc').value || '--';
+            const classeImc = document.getElementById('classIMC').value || '--';
+            const qd = document.getElementById('queixaPrincipal').value.trim() || 'não referida';
             const antePessoal = document.getElementById('antePessoais').value.trim() || 'sem informação';
             const anteFamiliar = document.getElementById('anteFamiliares').value.trim() || 'sem informação';
             const comorb = document.getElementById('comorbidades').value.trim() || 'nenhuma';
-
-            // medicações 1 e 2 (pode-se ampliar depois)
-            const med1 = document.getElementById('medNome1')?.value || ''; const dose1 = document.getElementById('medDose1')?.value || ''; const tempo1 = document.getElementById('medTempo1')?.value || ''; const ind1 = document.getElementById('medInd1')?.value || '';
-            const med2 = document.getElementById('medNome2')?.value || ''; const dose2 = document.getElementById('medDose2')?.value || ''; const tempo2 = document.getElementById('medTempo2')?.value || ''; const ind2 = document.getElementById('medInd2')?.value || '';
+            const med1 = document.getElementById('medNome1').value.trim();
+            const dose1 = document.getElementById('medDose1').value.trim();
+            const tempo1 = document.getElementById('medTempo1').value.trim();
+            const ind1 = document.getElementById('medInd1').value.trim();
+            const med2 = document.getElementById('medNome2').value.trim();
+            const dose2 = document.getElementById('medDose2').value.trim();
+            const tempo2 = document.getElementById('medTempo2').value.trim();
+            const ind2 = document.getElementById('medInd2').value.trim();
             let medText = '';
             if (med1) medText += `\n- ${med1} ${dose1} (${tempo1}) para ${ind1}`;
             if (med2) medText += `\n- ${med2} ${dose2} (${tempo2}) para ${ind2}`;
             if (!med1 && !med2) medText = ' nenhum medicamento referido.';
+            const terapia = document.getElementById('terapiaSelect').value || 'não informado';
 
-            const terapia = document.getElementById('terapiaSelect').value;
-
-            // funções psíquicas
-            const consc = document.getElementById('consciencia').value;
-            const atenc = document.getElementById('atencao').value;
-            const orient = document.getElementById('orientacao').value;
-            const mem = document.getElementById('memoria').value;
-            const intel = document.getElementById('inteligencia').value;
-            const sens = document.getElementById('sensopercepcao').value;
-            const afet = document.getElementById('afeto').value;
-            const pensCurso = document.getElementById('pensamentoCurso').value;
-            const conteudoPens = document.getElementById('conteudo').value;
-            const ling = document.getElementById('linguagem').value;
-            const psicomot = document.getElementById('psicomotricidade').value;
-            const vont = document.getElementById('vontade').value;
-            const juizo = document.getElementById('juizo').value;
+            // funções (se vazio, coloca 'não descrito')
+            const consc = document.getElementById('consciencia').value || 'não descrito';
+            const atenc = document.getElementById('atencao').value || 'não descrito';
+            const orient = document.getElementById('orientacao').value || 'não descrito';
+            const mem = document.getElementById('memoria').value || 'não descrito';
+            const intel = document.getElementById('inteligencia').value || 'não descrito';
+            const sens = document.getElementById('sensopercepcao').value || 'não descrito';
+            const afet = document.getElementById('afeto').value || 'não descrito';
+            const pensCurso = document.getElementById('pensamentoCurso').value || 'não descrito';
+            const conteudoPens = document.getElementById('conteudo').value || 'não descrito';
+            const ling = document.getElementById('linguagem').value || 'não descrito';
+            const psicomot = document.getElementById('psicomotricidade').value || 'não descrito';
+            const vont = document.getElementById('vontade').value || 'não descrito';
+            const juizo = document.getElementById('juizo').value || 'não descrito';
             const meemTotal = calcMEEM();
 
-            // --- HDA texto
-            let hda = `HISTÓRIA DA DOENÇA ATUAL (gerada automaticamente)\n`;
+            // HDA texto
+            let hda = `HISTÓRIA DA DOENÇA ATUAL (gerada)\n`;
             hda += `Paciente ${sexo}, ${idade} anos, IMC=${imc} (${classeImc}). QD: "${qd}".\n`;
-            hda += `Antecedentes pessoais: ${antePessoal}. Familiares: ${anteFamiliar}. Comorbidades: ${comorb}.\n`;
-            hda += `Medicações em uso: ${medText}\nPsicoterapia: ${terapia}.\n`;
-            hda += `Evolução: segundo relato, apresenta `;
+            hda += `Antecedentes pessoais: ${antePessoal}. Familiares: ${anteFamiliar}.\nComorbidades: ${comorb}.\n`;
+            hda += `Medicamentos: ${medText}\nPsicoterapia: ${terapia}.\n`;
+            hda += `Evolução: queixa-se de `;
             if (afet.includes('depress')) hda += `humor deprimido, `;
             if (conteudoPens.includes('suicida')) hda += `ideação suicida, `;
             if (sens.includes('alucinação')) hda += `${sens}, `;
             if (pensCurso.includes('acelerado')) hda += `pensamento acelerado, `;
-            if (psicomot.includes('agitado')) hda += `agitação psicomotora, `;
-            if (mem.includes('hipomnésia')) hda += `queixas de memória recente, `;
+            if (psicomot.includes('agitado')) hda += `agitação, `;
             hda = hda.replace(/, $/, '') + '.\n';
-
             hda += `MEEM ${meemTotal}/30. `;
 
             // exame psíquico
             let exame = `\nEXAME PSÍQUICO:\n`;
-            exame += `Consciência: ${consc}. Atenção: ${atenc}. Orientação: ${orient}. Memória: ${mem}. Inteligência: ${intel}. Sensopercepção: ${sens}.\n`;
-            exame += `Afeto: ${afet}. Pensamento curso: ${pensCurso}. Conteúdo: ${conteudoPens}. Linguagem: ${ling}. Psicomotricidade: ${psicomot}. Vontade: ${vont}. Juízo crítico: ${juizo}.\n`;
+            exame += `Consciência: ${consc}. Atenção: ${atenc}. Orientação: ${orient}.\nMemória: ${mem}. Inteligência: ${intel}. Sensopercepção: ${sens}.\n`;
+            exame += `Afeto: ${afet}. Pensamento curso: ${pensCurso}. Conteúdo: ${conteudoPens}.\nLinguagem: ${ling}. Psicomotricidade: ${psicomot}. Vontade: ${vont}. Juízo: ${juizo}.\n`;
 
-            // conduta automática
-            let conduta = `\nCONDUTA / PLANO (automática):\n`;
-            if (conteudoPens.includes('suicida') || conteudoPens.includes('auto')) conduta += '🚨 Risco de suicídio – avaliar necessidade de internação/observação. ';
-            if (sens.includes('alucinação') && juizo.includes('prejudicado')) conduta += 'Sintomas psicóticos ativos – considerar antipsicótico. ';
-            if (afet.includes('depress')) conduta += 'Humor deprimido – otimizar antidepressivo e suporte psicossocial. ';
-            if (mem.includes('hipomnésia') || meemTotal < 24) conduta += 'Declínio cognitivo – solicitar exames (neuroimagem, laboratório) e avaliar demência. ';
-            if (psicomot.includes('estereo') || psicomot.includes('agitado')) conduta += 'Necessário manejo da agitação/estereotipias. ';
-            conduta += '\nRetorno em 2 semanas. Articular com equipe multidisciplinar.';
+            // conduta
+            let conduta = `\nCONDUTA (automática):\n`;
+            if (conteudoPens.includes('suicida')) conduta += '🚨 Risco de suicídio – avaliar necessidade de observação. ';
+            if (sens.includes('alucinação') && juizo.includes('prejudicado')) conduta += 'Sintomas psicóticos – considerar antipsicótico. ';
+            if (afet.includes('depress')) conduta += 'Humor deprimido – ajustar antidepressivo e psicoterapia. ';
+            if (mem.includes('hipomnésia') || meemTotal < 24) conduta += 'Investigação de declínio cognitivo (imagem, laboratório). ';
+            conduta += '\nRetorno em 1-2 semanas, suporte CAPS.';
 
             document.getElementById('outputFinal').innerText = hda + exame + conduta;
         });
@@ -367,13 +365,9 @@
         // copiar
         document.getElementById('copiarTexto').addEventListener('click', function() {
             const texto = document.getElementById('outputFinal').innerText;
-            navigator.clipboard.writeText(texto).then(() => alert('✅ Copiado!'));
+            navigator.clipboard.writeText(texto).then(() => alert('✅ Texto copiado!'));
         });
-
-        // garantir que MEEM não mostre ${i} (já está ok)
-        // adicional: se quiser mais medicamentos, pode-se implementar, mas mantivemos dois fixos para clareza
     })();
 </script>
-<!-- correção dos selects (os placeholders ${i} foram substituídos por valores numéricos no inner html) -->
 </body>
-                                                                                    </html>
+</html>
