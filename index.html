@@ -3,371 +3,754 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🧠 Avaliação Psiquiátrica · CAPS (ambulatório)</title>
+    <title>Avaliação Geriátrica Ampla (AGA) - Sistema Especialista</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: #e2eef7;
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-            padding: 1.5rem;
-            color: #10344a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+            color: #2c3e50;
         }
+
         .container {
-            max-width: 1600px;
+            max-width: 1400px;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1.8rem;
         }
-        h1 { font-size: 2.2rem; font-weight: 500; border-bottom: 4px solid #1e6f9c; padding-bottom: 0.4rem; color: #043a54; }
-        h2 { font-size: 1.5rem; margin: 0.2rem 0 0.8rem; color: #105e83; border-left: 6px solid #3089c2; padding-left: 1rem; background: #f0f9ff; }
+
+        h1 {
+            color: #1e3c5c;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #2c5282;
+            margin: 25px 0 15px 0;
+            font-size: 1.5em;
+            background: #e8f0fe;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        h3 {
+            color: #2d3748;
+            margin: 15px 0 10px 0;
+            font-size: 1.2em;
+        }
+
         .card {
-            background: #ffffffd9;
-            backdrop-filter: blur(3px);
-            border-radius: 28px;
-            padding: 1.5rem 2rem;
-            box-shadow: 0 18px 30px -8px #1f4f6e80;
-            border: 1px solid #a6cfed;
-        }
-        .flex-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            align-items: flex-end;
-        }
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            min-width: 140px;
-        }
-        .input-group label, .field-label {
-            font-weight: 700;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-            color: #195e83;
-            margin-bottom: 0.2rem;
-        }
-        .input-group input, .input-group select, .input-group textarea {
-            padding: 0.7rem 1rem;
-            border: 1.5px solid #c3ddef;
-            border-radius: 40px;
-            font-size: 0.9rem;
             background: white;
-            transition: 0.15s;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left: 6px solid #3498db;
         }
-        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
-            border-color: #1a83c0;
-            box-shadow: 0 0 0 4px #1783ca30;
-            outline: none;
-        }
-        textarea { min-height: 65px; resize: vertical; border-radius: 24px !important; }
+
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 0.5rem 0 1rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
-        .med-row {
-            background: #ebf6fe;
-            border-radius: 28px;
-            padding: 1.2rem 1.5rem;
-            margin-bottom: 1rem;
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.2rem;
-            align-items: flex-end;
-        }
-        .mini-input {
-            display: flex;
-            flex-direction: column;
-            min-width: 140px;
-        }
-        .btn {
-            background: #1f77a3;
-            border: none;
-            color: white;
-            font-weight: 600;
-            padding: 0.8rem 2.2rem;
-            border-radius: 60px;
-            font-size: 1rem;
-            cursor: pointer;
-            box-shadow: 0 6px 12px #0e4b6e5e;
-            transition: 0.15s;
-            border: 1px solid #c3e2ff;
-        }
-        .btn:hover { background: #0c5c86; transform: scale(1.02); }
-        .btn-copy { background: #286f55; float: right; }
-        .meem-tbl {
-            width: 100%;
-            border-collapse: collapse;
-            background: #f1fafd;
-            border-radius: 24px;
-            overflow: hidden;
-        }
-        .meem-tbl th { background: #b5d8f0; padding: 0.8rem; }
-        .meem-tbl td { padding: 0.6rem 1rem; border-bottom: 1px solid #bed9f0; }
-        .meem-tbl select { padding: 0.3rem 1rem; border-radius: 40px; border: 1px solid #6fa9d1; }
-        .output-box {
-            background: #0e2b36;
-            color: #e0f3ff;
-            padding: 1.8rem 2.2rem;
-            border-radius: 32px;
-            font-family: 'JetBrains Mono', 'Courier New', monospace;
-            font-size: 0.9rem;
-            white-space: pre-wrap;
-            border: 2px solid #3483aa;
-            max-height: 440px;
+            gap: 15px;
+            margin-top: 10px;
+            max-height: 300px;
             overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
         }
-        .badge-imc {
-            background: #c7e2fa;
-            padding: 0.3rem 1.5rem;
-            border-radius: 50px;
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 200px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 5px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
             font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-success {
+            background: #27ae60;
+        }
+
+        .btn-success:hover {
+            background: #219a52;
+        }
+
+        .btn-info {
+            background: #f39c12;
+        }
+
+        .btn-info:hover {
+            background: #e67e22;
+        }
+
+        .result-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .meem-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 6px solid #9b59b6;
+        }
+
+        .meem-valor {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .meem-classificacao {
+            font-size: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .meem-normal { background: #c8e6c9; color: #1b5e20; }
+        .meem-leve { background: #fff9c4; color: #ff6f00; }
+        .meem-moderado { background: #ffcc80; color: #e65100; }
+        .meem-grave { background: #ffcdd2; color: #b71c1c; }
+
+        .medicamento-item {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 2px solid #e2e8f0;
+            position: relative;
+        }
+
+        .btn-remover {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .btn-remover:hover {
+            background: #c0392b;
+        }
+
+        .sugestoes-perguntas {
+            background: #ebf5ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .sugestao-item {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .sugestao-item:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: 5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #7f8c8d;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>🧠 EXAME PSÍQUICO · CAPS (anamnese completa)</h1>
+    <div class="container">
+        <h1>📋 Avaliação Geriátrica Ampla (AGA)</h1>
+        <p style="margin-bottom: 20px; color: #4a5568;">Baseado nas diretrizes da Sociedade Brasileira de Geriatria e Gerontologia</p>
 
-    <!-- ########## 1. IDENTIFICAÇÃO + QD + IMC automático ########## -->
-    <div class="card">
-        <h2>📌 1. Identificação e queixa principal</h2>
-        <div class="flex-row">
-            <div class="input-group"><label>Sexo</label>
-                <select id="sexo">
-                    <option value="" selected disabled>— selecione —</option>
-                    <option value="feminino">Feminino</option>
-                    <option value="masculino">Masculino</option>
-                    <option value="outro">Outro</option>
-                </select>
-            </div>
-            <div class="input-group"><label>Idade (anos)</label><input type="number" id="idade" value="" placeholder="ex: 38"></div>
-            <div class="input-group"><label>Peso (kg)</label><input type="number" id="peso" step="0.1" placeholder="ex: 72.5"></div>
-            <div class="input-group"><label>Altura (m)</label><input type="number" id="altura" step="0.01" placeholder="ex: 1.70"></div>
-            <div class="input-group"><label>IMC (autom.)</label><input type="text" id="imc" readonly placeholder="--"></div>
-            <div class="input-group"><label>Classif. IMC</label><input type="text" id="classIMC" readonly placeholder="--"></div>
-        </div>
-        <div style="margin-top: 1.2rem;">
-            <label class="field-label">📝 Queixa principal (QD):</label>
-            <textarea id="queixaPrincipal" placeholder="Ex.: 'escuto vozes', 'tristeza o tempo todo'..."></textarea>
-        </div>
-    </div>
-
-    <!-- ########## 2. ANTECEDENTES ########## -->
-    <div class="card">
-        <h2>📋 2. Antecedentes pessoais, familiares, comorbidades</h2>
-        <div class="grid-2">
-            <div><label class="field-label">Antecedentes pessoais (infância, desenvolvimento, traumas)</label>
-                <textarea id="antePessoais" placeholder="ex.: nascimento normal, abuso na infância..."></textarea>
-            </div>
-            <div><label class="field-label">Antecedentes familiares (transtornos mentais, suicídio)</label>
-                <textarea id="anteFamiliares" placeholder="ex.: mãe depressão, irmão alcoolista"></textarea>
+        <!-- Identificação -->
+        <div class="card">
+            <h2>1. Identificação do Paciente</h2>
+            <div class="grid-4">
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="nome" placeholder="Digite o nome do paciente">
+                </div>
+                <div class="form-group">
+                    <label>Idade</label>
+                    <input type="number" id="idade" min="0" max="120">
+                </div>
+                <div class="form-group">
+                    <label>Sexo</label>
+                    <select id="sexo">
+                        <option value="">Selecione</option>
+                        <option value="Feminino">Feminino</option>
+                        <option value="Masculino">Masculino</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Data da Avaliação</label>
+                    <input type="date" id="dataAvaliacao" value="2026-02-18">
+                </div>
             </div>
         </div>
-        <div style="margin-top:0.8rem">
-            <label class="field-label">🧾 Comorbidades clínicas (HAS, DM, epilepsia, etc.)</label>
-            <textarea id="comorbidades" placeholder="ex.: hipertensão, hipotireoidismo"></textarea>
+
+        <!-- MEEM -->
+        <div class="card">
+            <h2>2. Mini Exame do Estado Mental (MEEM)</h2>
+            
+            <div class="grid-3">
+                <div class="form-group">
+                    <label>Orientação Temporal (0-5)</label>
+                    <input type="number" id="meemTempo" min="0" max="5" step="1" oninput="calcularMEEM()">
+                </div>
+                <div class="form-group">
+                    <label>Orientação Espacial (0-5)</label>
+                    <input type="number" id="meemEspaco" min="0" max="5" step="1" oninput="calcularMEEM()">
+                </div>
+                <div class="form-group">
+                    <label>Registro (0-3)</label>
+                    <input type="number" id="meemRegistro" min="0" max="3" step="1" oninput="calcularMEEM()">
+                </div>
+                <div class="form-group">
+                    <label>Atenção e Cálculo (0-5)</label>
+                    <input type="number" id="meemAtencao" min="0" max="5" step="1" oninput="calcularMEEM()">
+                </div>
+                <div class="form-group">
+                    <label>Memória de Evocação (0-3)</label>
+                    <input type="number" id="meemMemoria" min="0" max="3" step="1" oninput="calcularMEEM()">
+                </div>
+                <div class="form-group">
+                    <label>Linguagem (0-9)</label>
+                    <input type="number" id="meemLinguagem" min="0" max="9" step="1" oninput="calcularMEEM()">
+                </div>
+            </div>
+
+            <!-- Resultado MEEM com classificação automática -->
+            <div id="meemContainer" class="meem-container" style="display: none;">
+                <div id="meemValor" class="meem-valor"></div>
+                <div id="meemClassificacao" class="meem-classificacao"></div>
+            </div>
         </div>
+
+        <!-- Medicamentos -->
+        <div class="card">
+            <h2>3. Medicamentos em Uso</h2>
+            <div id="medicamentos-container">
+                <!-- Os medicamentos serão adicionados aqui dinamicamente -->
+            </div>
+            <button class="btn" onclick="adicionarMedicamento()">+ Adicionar Medicamento</button>
+        </div>
+
+        <!-- Antecedentes com perguntas sugestivas -->
+        <div class="card">
+            <h2>4. Antecedentes Pessoais e Familiares</h2>
+            
+            <!-- Sugestões de perguntas -->
+            <div class="sugestoes-perguntas">
+                <h3 style="margin-top: 0; color: #2980b9;">💡 Perguntas sugeridas para anamnese:</h3>
+                <div class="grid-2">
+                    <div>
+                        <div class="sugestao-item">Quedas nos últimos 12 meses?</div>
+                        <div class="sugestao-item">Perda de peso não intencional?</div>
+                        <div class="sugestao-item">Dificuldade para realizar AIVDs (compras, finanças)?</div>
+                        <div class="sugestao-item">Incontinência urinária ou fecal?</div>
+                        <div class="sugestao-item">Sintomas depressivos (tristeza, anedonia)?</div>
+                    </div>
+                    <div>
+                        <div class="sugestao-item">Histórico de demência na família?</div>
+                        <div class="sugestao-item">Doenças cardiovasculares (IAM, AVC)?</div>
+                        <div class="sugestao-item">Osteoporose ou fraturas prévias?</div>
+                        <div class="sugestao-item">Diabetes ou hipertensão?</div>
+                        <div class="sugestao-item">Tabagismo ou etilismo?</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <h3>Antecedentes Pessoais</h3>
+                    <div class="checkbox-group" id="antecedentesPessoais">
+                        <div class="checkbox-item"><input type="checkbox" value="HAS"> HAS</div>
+                        <div class="checkbox-item"><input type="checkbox" value="DM"> Diabetes Mellitus</div>
+                        <div class="checkbox-item"><input type="checkbox" value="Dislipidemia"> Dislipidemia</div>
+                        <div class="checkbox-item"><input type="checkbox" value="IAM"> Infarto Agudo do Miocárdio</div>
+                        <div class="checkbox-item"><input type="checkbox" value="AVC"> AVC</div>
+                        <div class="checkbox-item"><input type="checkbox" value="ICC"> Insuficiência Cardíaca</div>
+                        <div class="checkbox-item"><input type="checkbox" value="FA"> Fibrilação Atrial</div>
+                        <div class="checkbox-item"><input type="checkbox" value="DPOC"> DPOC</div>
+                        <div class="checkbox-item"><input type="checkbox" value="Osteoporose"> Osteoporose</div>
+                        <div class="checkbox-item"><input type="checkbox" value="Hipotireoidismo"> Hipotireoidismo</div>
+                        <div class="checkbox-item"><input type="checkbox" value="Parkinson"> Doença de Parkinson</div>
+                        <div class="checkbox-item"><input type="checkbox" value="Demência"> Demência</div>
+                        <div class="checkbox-item"><input type="checkbox" value="Depressão"> Depressão</div>
+                        <div class="checkbox-item"><input type="checkbox" value="Quedas"> Quedas frequentes</div>
+                        <div class="checkbox-item"><input type="checkbox" value="Incontinência urinária"> Incontinência urinária</div>
+                        <div class="checkbox-item"><input type="checkbox" value="Incontinência fecal"> Incontinência fecal</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>Antecedentes Familiares</h3>
+                    <div class="checkbox-group" id="antecedentesFamiliares">
+                        <div class="checkbox-item"><input type="checkbox" value="HAS familiar"> HAS</div>
+                        <div class="checkbox-item"><input type="checkbox" value="DM familiar"> Diabetes</div>
+                        <div class="checkbox-item"><input type="checkbox" value="IAM familiar"> Infarto</div>
+                        <div class="checkbox-item"><input type="checkbox" value="AVC familiar"> AVC</div>
+                        <div class="checkbox-item"><input type="checkbox" value="Demência familiar"> Demência/Alzheimer</div>
+                        <div class="checkbox-item"><input type="checkbox" value="Parkinson familiar"> Parkinson</div>
+                        <div class="checkbox-item"><input type="checkbox" value="Osteoporose familiar"> Osteoporose</div>
+                        <div class="checkbox-item"><input type="checkbox" value="Neoplasias"> Neoplasias</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terapias -->
+        <div class="card">
+            <h2>5. Terapias em Realização</h2>
+            
+            <div class="grid-3">
+                <div class="form-group">
+                    <label>Fisioterapia</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="fisioterapia" value="sim" onchange="toggleTerapiaCampos('fisio')"> Sim
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="fisioterapia" value="nao" onchange="toggleTerapiaCampos('fisio')" checked> Não
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Fonoaudiologia</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="fono" value="sim" onchange="toggleTerapiaCampos('fono')"> Sim
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="fono" value="nao" onchange="toggleTerapiaCampos('fono')" checked> Não
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Terapia Ocupacional</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="to" value="sim" onchange="toggleTerapiaCampos('to')"> Sim
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="to" value="nao" onchange="toggleTerapiaCampos('to')" checked> Não
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campos para Sim (aparecem apenas quando selecionado Sim) -->
+            <div id="camposFisio" style="display: none;" class="grid-2">
+                <div class="form-group">
+                    <label>Onde realiza fisioterapia?</label>
+                    <input type="text" placeholder="Ex: Clínica X, Domicílio, UBS...">
+                </div>
+                <div class="form-group">
+                    <label>Desde quando?</label>
+                    <input type="text" placeholder="Ex: 3 meses, desde 2024...">
+                </div>
+            </div>
+
+            <div id="camposFono" style="display: none;" class="grid-2">
+                <div class="form-group">
+                    <label>Onde realiza fonoaudiologia?</label>
+                    <input type="text" placeholder="Ex: Clínica X, Domicílio, UBS...">
+                </div>
+                <div class="form-group">
+                    <label>Desde quando?</label>
+                    <input type="text" placeholder="Ex: 3 meses, desde 2024...">
+                </div>
+            </div>
+
+            <div id="camposTO" style="display: none;" class="grid-2">
+                <div class="form-group">
+                    <label>Onde realiza terapia ocupacional?</label>
+                    <input type="text" placeholder="Ex: Clínica X, Domicílio, UBS...">
+                </div>
+                <div class="form-group">
+                    <label>Desde quando?</label>
+                    <input type="text" placeholder="Ex: 3 meses, desde 2024...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões Finais -->
+        <div style="display: flex; gap: 10px; margin: 30px 0; flex-wrap: wrap;">
+            <button class="btn btn-success" onclick="gerarRelatorio()">📋 Gerar Relatório Completo</button>
+            <button class="btn" onclick="copiarTexto()">📋 Copiar Relatório</button>
+            <button class="btn" onclick="limparFormulario()">🔄 Nova Avaliação</button>
+        </div>
+
+        <!-- Relatório Completo -->
+        <div class="result-box" id="relatorioCompleto" style="display:none;">
+            <h3>📄 RELATÓRIO DA AVALIAÇÃO GERIÁTRICA AMPLA</h3>
+            <div id="conteudoRelatorio" style="white-space: pre-wrap; line-height: 1.6;"></div>
+        </div>
+        
+        <footer>
+            Baseado nas diretrizes da Sociedade Brasileira de Geriatria e Gerontologia
+        </footer>
     </div>
 
-    <!-- ########## 3. MEDICAÇÕES + TERAPIA ########## -->
-    <div class="card">
-        <h2>💊 3. Medicações em uso e psicoterapia</h2>
-        <!-- medicamento 1 -->
-        <div class="med-row">
-            <div class="mini-input"><label>Nome (med 1)</label><input type="text" id="medNome1" placeholder="ex.: sertralina"></div>
-            <div class="mini-input"><label>Dose</label><input type="text" id="medDose1" placeholder="50mg/dia"></div>
-            <div class="mini-input"><label>Tempo uso</label><input type="text" id="medTempo1" placeholder="ex.: 3 meses"></div>
-            <div class="mini-input"><label>Indicação</label><input type="text" id="medInd1" placeholder="depressão"></div>
-        </div>
-        <!-- medicamento 2 -->
-        <div class="med-row">
-            <div class="mini-input"><label>Nome (med 2)</label><input type="text" id="medNome2" placeholder="ex.: losartana"></div>
-            <div class="mini-input"><label>Dose</label><input type="text" id="medDose2" placeholder="50mg/dia"></div>
-            <div class="mini-input"><label>Tempo uso</label><input type="text" id="medTempo2" placeholder="ex.: 1 ano"></div>
-            <div class="mini-input"><label>Indicação</label><input type="text" id="medInd2" placeholder="HAS"></div>
-        </div>
-        <!-- terapia -->
-        <div style="margin-top:0.8rem;">
-            <label class="field-label">🧘 Acompanhamento psicoterápico:</label>
-            <select id="terapiaSelect">
-                <option value="" selected disabled>— selecione —</option>
-                <option value="não faz terapia">não faz terapia</option>
-                <option value="psicoterapia semanal (psicanálise)">psicoterapia semanal (psicanálise)</option>
-                <option value="psicoterapia TCC">TCC</option>
-                <option value="grupo de apoio CAPS">grupo de apoio CAPS</option>
-                <option value="outro">outro</option>
-            </select>
-        </div>
-    </div>
+    <script>
+        // Funções para MEEM
+        function calcularMEEM() {
+            const tempo = parseInt(document.getElementById('meemTempo').value) || 0;
+            const espaco = parseInt(document.getElementById('meemEspaco').value) || 0;
+            const registro = parseInt(document.getElementById('meemRegistro').value) || 0;
+            const atencao = parseInt(document.getElementById('meemAtencao').value) || 0;
+            const memoria = parseInt(document.getElementById('meemMemoria').value) || 0;
+            const linguagem = parseInt(document.getElementById('meemLinguagem').value) || 0;
+            
+            const total = tempo + espaco + registro + atencao + memoria + linguagem;
+            
+            const meemContainer = document.getElementById('meemContainer');
+            const meemValor = document.getElementById('meemValor');
+            const meemClassificacao = document.getElementById('meemClassificacao');
+            
+            if (total > 0) {
+                meemContainer.style.display = 'block';
+                meemValor.innerHTML = `MEEM: ${total}/30`;
+                
+                const classificacao = classificarMEEM(total);
+                meemClassificacao.innerHTML = classificacao.texto;
+                meemClassificacao.className = `meem-classificacao ${classificacao.classe}`;
+            } else {
+                meemContainer.style.display = 'none';
+            }
+        }
 
-    <!-- ########## 4. MEEM – sem placeholders, tudo numérico fixo ########## -->
-    <div class="card">
-        <h2>🧩 4. Mini-Exame do Estado Mental (MEEM)  total: <span id="meemTotalDisplay">0</span>/30</h2>
-        <table class="meem-tbl">
-            <tr><th>Item</th><th>Pontuação</th></tr>
-            <tr><td>Orientação temporal (ano, estaç, dia, mês, dia mês) 0-5</td><td><select id="meem1" class="meem"> <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option> </select></td></tr>
-            <tr><td>Orientação espacial (país, estado, cidade, local, andar) 0-5</td><td><select id="meem2" class="meem"> <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option> </select></td></tr>
-            <tr><td>Registro (pente, rua, azul) 0-3</td><td><select id="meem3" class="meem"> <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option> </select></td></tr>
-            <tr><td>Atenção/cálculo (100-7 ou série) 0-5</td><td><select id="meem4" class="meem"> <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option> </select></td></tr>
-            <tr><td>Evocação (3 palavras) 0-3</td><td><select id="meem5" class="meem"> <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option> </select></td></tr>
-            <tr><td>Linguagem: nomear lápis/relógio 0-2</td><td><select id="meem6" class="meem"> <option value="0">0</option><option value="1">1</option><option value="2">2</option> </select></td></tr>
-            <tr><td>Repetir "nem aqui, nem ali, nem lá" 0-1</td><td><select id="meem7" class="meem"> <option value="0">0</option><option value="1">1</option> </select></td></tr>
-            <tr><td>Comando três estágios (pegar/dobrar/chão) 0-3</td><td><select id="meem8" class="meem"> <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option> </select></td></tr>
-            <tr><td>Ler e executar "FECHE OS OLHOS" 0-1</td><td><select id="meem9" class="meem"> <option value="0">0</option><option value="1">1</option> </select></td></tr>
-            <tr><td>Escrever uma frase 0-1</td><td><select id="meem10" class="meem"> <option value="0">0</option><option value="1">1</option> </select></td></tr>
-            <tr><td>Copiar desenho 0-1</td><td><select id="meem11" class="meem"> <option value="0">0</option><option value="1">1</option> </select></td></tr>
-        </table>
-    </div>
+        function classificarMEEM(pontuacao) {
+            const escolaridade = prompt("Qual a escolaridade do paciente? (analfabeto, baixa, média, alta)", "média");
+            
+            let resultado = { texto: "", classe: "" };
+            
+            if (escolaridade.toLowerCase() === "analfabeto") {
+                if (pontuacao <= 18) resultado = { texto: "Provável declínio cognitivo", classe: "meem-moderado" };
+                else if (pontuacao <= 22) resultado = { texto: "Possível declínio cognitivo", classe: "meem-leve" };
+                else resultado = { texto: "Sem declínio cognitivo", classe: "meem-normal" };
+            } else if (escolaridade.toLowerCase() === "baixa") {
+                if (pontuacao <= 20) resultado = { texto: "Provável declínio cognitivo", classe: "meem-moderado" };
+                else if (pontuacao <= 24) resultado = { texto: "Possível declínio cognitivo", classe: "meem-leve" };
+                else resultado = { texto: "Sem declínio cognitivo", classe: "meem-normal" };
+            } else if (escolaridade.toLowerCase() === "média") {
+                if (pontuacao <= 22) resultado = { texto: "Provável declínio cognitivo", classe: "meem-moderado" };
+                else if (pontuacao <= 26) resultado = { texto: "Possível declínio cognitivo", classe: "meem-leve" };
+                else resultado = { texto: "Sem declínio cognitivo", classe: "meem-normal" };
+            } else {
+                if (pontuacao <= 24) resultado = { texto: "Provável declínio cognitivo", classe: "meem-moderado" };
+                else if (pontuacao <= 28) resultado = { texto: "Possível declínio cognitivo", classe: "meem-leve" };
+                else resultado = { texto: "Sem declínio cognitivo", classe: "meem-normal" };
+            }
+            
+            return resultado;
+        }
 
-    <!-- ########## 5. EXAME PSÍQUICO (APEJUCOL) ########## -->
-    <div class="card">
-        <h2>🔎 5. Exame psíquico detalhado</h2>
-        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1.2rem;">
-            <div><label>Consciência</label> <select id="consciencia"><option value="" selected>--</option><option value="lúcido">lúcido</option><option value="obnubilado">obnubilado</option><option value="sonolento">sonolento</option><option value="torporoso">torporoso</option><option value="delirium">delirium</option></select></div>
-            <div><label>Atenção</label> <select id="atencao"><option value="" selected>--</option><option value="normoprosexia">normoprosexia</option><option value="hipoprosexia">hipoprosexia</option><option value="hiperprosexia">hiperprosexia</option><option value="distração">distração</option></select></div>
-            <div><label>Orientação</label> <select id="orientacao"><option value="" selected>--</option><option value="orientado auto e alopsiquicamente">orientado</option><option value="desorientado temporal">desorientado temporal</option><option value="desorientado espacial">desorientado espacial</option></select></div>
-            <div><label>Memória</label> <select id="memoria"><option value="" selected>--</option><option value="preservada">preservada</option><option value="hipomnésia anterógrada">hipomnésia anterógrada</option><option value="amnésia retrógrada">amnésia retrógrada</option><option value="confabulação">confabulação</option></select></div>
-            <div><label>Inteligência</label> <select id="inteligencia"><option value="" selected>--</option><option value="dentro da média">dentro da média</option><option value="inferior à média">inferior</option><option value="deficit moderado">déficit moderado</option></select></div>
-            <div><label>Sensopercepção</label> <select id="sensopercepcao"><option value="" selected>--</option><option value="sem alterações">sem alterações</option><option value="alucinação auditiva">alucinação auditiva</option><option value="alucinação visual">alucinação visual</option><option value="ilusão">ilusão</option></select></div>
-            <div><label>Afeto/humor</label> <select id="afeto"><option value="" selected>--</option><option value="eutímico">eutímico</option><option value="depressivo">depressivo</option><option value="ansioso">ansioso</option><option value="eufórico">eufórico</option><option value="embotado">embotado</option></select></div>
-            <div><label>Pensamento (curso)</label> <select id="pensamentoCurso"><option value="" selected>--</option><option value="regular">regular</option><option value="acelerado (taquipsiquismo)">acelerado</option><option value="lentificado">lentificado</option><option value="fuga de idéias">fuga de idéias</option></select></div>
-            <div><label>Conteúdo pensamento</label> <select id="conteudo"><option value="" selected>--</option><option value="sem delírios">sem delírios</option><option value="delírio persecutório">persecutório</option><option value="delírio de grandeza">grandeza</option><option value="ideação suicida">ideação suicida</option><option value="obsessões">obsessões</option></select></div>
-            <div><label>Linguagem</label> <select id="linguagem"><option value="" selected>--</option><option value="fluente">fluente</option><option value="logorreia">logorreia</option><option value="mutismo">mutismo</option><option value="ecolalia">ecolalia</option></select></div>
-            <div><label>Psicomotricidade</label> <select id="psicomotricidade"><option value="" selected>--</option><option value="normal">normal</option><option value="agitado">agitado</option><option value="lentificado">lentificado</option><option value="estereotipias">estereotipias</option></select></div>
-            <div><label>Vontade</label> <select id="vontade"><option value="" selected>--</option><option value="normobulia">normobulia</option><option value="hipobulia">hipobulia</option><option value="abulia">abulia</option></select></div>
-            <div><label>Juízo crítico</label> <select id="juizo"><option value="" selected>--</option><option value="preservado">preservado</option><option value="parcial">parcial</option><option value="prejudicado">prejudicado</option></select></div>
-        </div>
-    </div>
+        // Funções para Medicamentos
+        let contadorMedicamentos = 1;
 
-    <!-- ########## BOTÕES E OUTPUT ########## -->
-    <div style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
-        <button class="btn" id="gerarHDA">📄 GERAR HDA + CONDUTA</button>
-        <button class="btn btn-copy" id="copiarTexto">📋 COPIAR EVOLUÇÃO</button>
-    </div>
-    <div class="output-box" id="outputFinal">
-        Preencha os campos e clique em "GERAR HDA" para produzir o texto.
-    </div>
-    <div style="color: #1f5c7a; font-size: 0.85rem; border-top: 1px dashed #4f96c3; padding-top: 0.8rem;">
-        ⚡ IMC automático. Todos os campos iniciados em branco. MEEM sem placeholders.
-    </div>
-</div>
+        function adicionarMedicamento() {
+            const container = document.getElementById('medicamentos-container');
+            const novoMed = document.createElement('div');
+            novoMed.className = 'medicamento-item';
+            novoMed.id = `med-${contadorMedicamentos}`;
+            
+            novoMed.innerHTML = `
+                <button class="btn-remover" onclick="removerMedicamento('med-${contadorMedicamentos}')">✕ Remover</button>
+                <div class="grid-3">
+                    <div class="form-group">
+                        <label>Medicamento</label>
+                        <input type="text" placeholder="Nome do medicamento">
+                    </div>
+                    <div class="form-group">
+                        <label>Dose</label>
+                        <input type="text" placeholder="Ex: 50mg">
+                    </div>
+                    <div class="form-group">
+                        <label>Posologia</label>
+                        <input type="text" placeholder="Ex: 1x/dia, 8/8h">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Data de início</label>
+                        <input type="text" placeholder="Ex: 01/01/2026">
+                    </div>
+                    <div class="form-group">
+                        <label>Indicação</label>
+                        <input type="text" placeholder="Ex: HAS, DM...">
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(novoMed);
+            contadorMedicamentos++;
+        }
 
-<script>
-    (function() {
-        // IMC automático com inputs vazios
-        function updateIMC() {
-            const peso = parseFloat(document.getElementById('peso').value);
-            const altura = parseFloat(document.getElementById('altura').value);
-            if (isNaN(peso) || isNaN(altura) || peso <= 0 || altura < 0.5) {
-                document.getElementById('imc').value = '';
-                document.getElementById('classIMC').value = '';
+        function removerMedicamento(id) {
+            const elemento = document.getElementById(id);
+            if (elemento) {
+                elemento.remove();
+            }
+        }
+
+        // Funções para Terapias
+        function toggleTerapiaCampos(tipo) {
+            const radios = document.getElementsByName(tipo === 'fisio' ? 'fisioterapia' : 
+                                                     tipo === 'fono' ? 'fono' : 'to');
+            let valor = '';
+            
+            for (const radio of radios) {
+                if (radio.checked) {
+                    valor = radio.value;
+                    break;
+                }
+            }
+            
+            const camposId = tipo === 'fisio' ? 'camposFisio' : 
+                             tipo === 'fono' ? 'camposFono' : 'camposTO';
+            
+            document.getElementById(camposId).style.display = valor === 'sim' ? 'grid' : 'none';
+        }
+
+        // Funções para relatório
+        function gerarRelatorio() {
+            let relatorio = '';
+            
+            // Identificação
+            const nome = document.getElementById('nome').value || 'Não informado';
+            const idade = document.getElementById('idade').value || 'Não informada';
+            const sexo = document.getElementById('sexo').value || 'Não informado';
+            const data = document.getElementById('dataAvaliacao').value || new Date().toLocaleDateString();
+            
+            relatorio += `**IDENTIFICAÇÃO**\n`;
+            relatorio += `Nome: ${nome}\n`;
+            relatorio += `Idade: ${idade} anos | Sexo: ${sexo}\n`;
+            relatorio += `Data da avaliação: ${data}\n\n`;
+            
+            // MEEM
+            const meemValor = document.getElementById('meemValor')?.innerText;
+            const meemClassificacao = document.getElementById('meemClassificacao')?.innerText;
+            
+            if (meemValor) {
+                relatorio += `**MINI EXAME DO ESTADO MENTAL**\n`;
+                relatorio += `${meemValor}\n`;
+                if (meemClassificacao) relatorio += `Classificação: ${meemClassificacao}\n\n`;
+            }
+            
+            // Medicamentos
+            relatorio += `**MEDICAMENTOS EM USO**\n`;
+            const medicamentos = document.querySelectorAll('#medicamentos-container .medicamento-item');
+            
+            if (medicamentos.length > 0) {
+                medicamentos.forEach((med, index) => {
+                    const inputs = med.querySelectorAll('input');
+                    const nome = inputs[0]?.value || 'Não informado';
+                    const dose = inputs[1]?.value || '';
+                    const posologia = inputs[2]?.value || '';
+                    const inicio = inputs[3]?.value || '';
+                    const indicacao = inputs[4]?.value || '';
+                    
+                    relatorio += `${index+1}. ${nome}`;
+                    if (dose) relatorio += ` - ${dose}`;
+                    if (posologia) relatorio += ` (${posologia})`;
+                    if (inicio) relatorio += ` - Início: ${inicio}`;
+                    if (indicacao) relatorio += ` - Indicação: ${indicacao}`;
+                    relatorio += `\n`;
+                });
+            } else {
+                relatorio += `Nenhum medicamento informado\n`;
+            }
+            relatorio += `\n`;
+            
+            // Antecedentes
+            relatorio += `**ANTECEDENTES**\n`;
+            
+            const pessoais = Array.from(document.querySelectorAll('#antecedentesPessoais input:checked')).map(cb => cb.value);
+            if (pessoais.length > 0) {
+                relatorio += `Pessoais: ${pessoais.join(', ')}\n`;
+            } else {
+                relatorio += `Pessoais: Nenhum informado\n`;
+            }
+            
+            const familiares = Array.from(document.querySelectorAll('#antecedentesFamiliares input:checked')).map(cb => cb.value);
+            if (familiares.length > 0) {
+                relatorio += `Familiares: ${familiares.join(', ')}\n`;
+            } else {
+                relatorio += `Familiares: Nenhum informado\n`;
+            }
+            relatorio += `\n`;
+            
+            // Terapias
+            relatorio += `**TERAPIAS EM REALIZAÇÃO**\n`;
+            
+            const fisioSim = document.querySelector('input[name="fisioterapia"][value="sim"]')?.checked;
+            if (fisioSim) {
+                const onde = document.querySelector('#camposFisio input:first-child')?.value || 'não informado';
+                const desde = document.querySelector('#camposFisio input:last-child')?.value || 'não informado';
+                relatorio += `Fisioterapia: Sim (${onde}, ${desde})\n`;
+            } else {
+                relatorio += `Fisioterapia: Não\n`;
+            }
+            
+            const fonoSim = document.querySelector('input[name="fono"][value="sim"]')?.checked;
+            if (fonoSim) {
+                const onde = document.querySelector('#camposFono input:first-child')?.value || 'não informado';
+                const desde = document.querySelector('#camposFono input:last-child')?.value || 'não informado';
+                relatorio += `Fonoaudiologia: Sim (${onde}, ${desde})\n`;
+            } else {
+                relatorio += `Fonoaudiologia: Não\n`;
+            }
+            
+            const toSim = document.querySelector('input[name="to"][value="sim"]')?.checked;
+            if (toSim) {
+                const onde = document.querySelector('#camposTO input:first-child')?.value || 'não informado';
+                const desde = document.querySelector('#camposTO input:last-child')?.value || 'não informado';
+                relatorio += `Terapia Ocupacional: Sim (${onde}, ${desde})\n`;
+            } else {
+                relatorio += `Terapia Ocupacional: Não\n`;
+            }
+            
+            const relatorioDiv = document.getElementById('relatorioCompleto');
+            relatorioDiv.style.display = 'block';
+            document.getElementById('conteudoRelatorio').innerHTML = relatorio.replace(/\n/g, '<br>');
+        }
+
+        function copiarTexto() {
+            const relatorioDiv = document.getElementById('relatorioCompleto');
+            if (relatorioDiv.style.display === 'none') {
+                alert('Gere o relatório completo primeiro!');
                 return;
             }
-            const imc = peso / (altura * altura);
-            let classe = '';
-            if (imc < 18.5) classe = 'Abaixo do peso';
-            else if (imc < 25) classe = 'Peso normal';
-            else if (imc < 30) classe = 'Sobrepeso';
-            else if (imc < 35) classe = 'Obesidade I';
-            else if (imc < 40) classe = 'Obesidade II';
-            else classe = 'Obesidade III';
-            document.getElementById('imc').value = imc.toFixed(1);
-            document.getElementById('classIMC').value = classe;
+            
+            const texto = document.getElementById('conteudoRelatorio').innerText;
+            navigator.clipboard.writeText(texto).then(() => {
+                alert('Relatório copiado para a área de transferência!');
+            }).catch(() => {
+                alert('Erro ao copiar texto. Selecione e copie manualmente.');
+            });
         }
-        document.getElementById('peso')?.addEventListener('input', updateIMC);
-        document.getElementById('altura')?.addEventListener('input', updateIMC);
 
-        // MEEM total
-        const meemSelects = document.querySelectorAll('.meem');
-        function calcMEEM() {
-            let total = 0;
-            meemSelects.forEach(sel => { total += parseInt(sel.value) || 0; });
-            document.getElementById('meemTotalDisplay').innerText = total;
-            return total;
+        function limparFormulario() {
+            if (confirm('Tem certeza que deseja limpar todos os dados?')) {
+                location.reload();
+            }
         }
-        meemSelects.forEach(s => s.addEventListener('change', calcMEEM));
-        calcMEEM();
 
-        // Gerar HDA e conduta
-        document.getElementById('gerarHDA').addEventListener('click', function() {
-            const sexo = document.getElementById('sexo').value || 'não informado';
-            const idade = document.getElementById('idade').value || '?';
-            const imc = document.getElementById('imc').value || '--';
-            const classeImc = document.getElementById('classIMC').value || '--';
-            const qd = document.getElementById('queixaPrincipal').value.trim() || 'não referida';
-            const antePessoal = document.getElementById('antePessoais').value.trim() || 'sem informação';
-            const anteFamiliar = document.getElementById('anteFamiliares').value.trim() || 'sem informação';
-            const comorb = document.getElementById('comorbidades').value.trim() || 'nenhuma';
-            const med1 = document.getElementById('medNome1').value.trim();
-            const dose1 = document.getElementById('medDose1').value.trim();
-            const tempo1 = document.getElementById('medTempo1').value.trim();
-            const ind1 = document.getElementById('medInd1').value.trim();
-            const med2 = document.getElementById('medNome2').value.trim();
-            const dose2 = document.getElementById('medDose2').value.trim();
-            const tempo2 = document.getElementById('medTempo2').value.trim();
-            const ind2 = document.getElementById('medInd2').value.trim();
-            let medText = '';
-            if (med1) medText += `\n- ${med1} ${dose1} (${tempo1}) para ${ind1}`;
-            if (med2) medText += `\n- ${med2} ${dose2} (${tempo2}) para ${ind2}`;
-            if (!med1 && !med2) medText = ' nenhum medicamento referido.';
-            const terapia = document.getElementById('terapiaSelect').value || 'não informado';
-
-            // funções (se vazio, coloca 'não descrito')
-            const consc = document.getElementById('consciencia').value || 'não descrito';
-            const atenc = document.getElementById('atencao').value || 'não descrito';
-            const orient = document.getElementById('orientacao').value || 'não descrito';
-            const mem = document.getElementById('memoria').value || 'não descrito';
-            const intel = document.getElementById('inteligencia').value || 'não descrito';
-            const sens = document.getElementById('sensopercepcao').value || 'não descrito';
-            const afet = document.getElementById('afeto').value || 'não descrito';
-            const pensCurso = document.getElementById('pensamentoCurso').value || 'não descrito';
-            const conteudoPens = document.getElementById('conteudo').value || 'não descrito';
-            const ling = document.getElementById('linguagem').value || 'não descrito';
-            const psicomot = document.getElementById('psicomotricidade').value || 'não descrito';
-            const vont = document.getElementById('vontade').value || 'não descrito';
-            const juizo = document.getElementById('juizo').value || 'não descrito';
-            const meemTotal = calcMEEM();
-
-            // HDA texto
-            let hda = `HISTÓRIA DA DOENÇA ATUAL (gerada)\n`;
-            hda += `Paciente ${sexo}, ${idade} anos, IMC=${imc} (${classeImc}). QD: "${qd}".\n`;
-            hda += `Antecedentes pessoais: ${antePessoal}. Familiares: ${anteFamiliar}.\nComorbidades: ${comorb}.\n`;
-            hda += `Medicamentos: ${medText}\nPsicoterapia: ${terapia}.\n`;
-            hda += `Evolução: queixa-se de `;
-            if (afet.includes('depress')) hda += `humor deprimido, `;
-            if (conteudoPens.includes('suicida')) hda += `ideação suicida, `;
-            if (sens.includes('alucinação')) hda += `${sens}, `;
-            if (pensCurso.includes('acelerado')) hda += `pensamento acelerado, `;
-            if (psicomot.includes('agitado')) hda += `agitação, `;
-            hda = hda.replace(/, $/, '') + '.\n';
-            hda += `MEEM ${meemTotal}/30. `;
-
-            // exame psíquico
-            let exame = `\nEXAME PSÍQUICO:\n`;
-            exame += `Consciência: ${consc}. Atenção: ${atenc}. Orientação: ${orient}.\nMemória: ${mem}. Inteligência: ${intel}. Sensopercepção: ${sens}.\n`;
-            exame += `Afeto: ${afet}. Pensamento curso: ${pensCurso}. Conteúdo: ${conteudoPens}.\nLinguagem: ${ling}. Psicomotricidade: ${psicomot}. Vontade: ${vont}. Juízo: ${juizo}.\n`;
-
-            // conduta
-            let conduta = `\nCONDUTA (automática):\n`;
-            if (conteudoPens.includes('suicida')) conduta += '🚨 Risco de suicídio – avaliar necessidade de observação. ';
-            if (sens.includes('alucinação') && juizo.includes('prejudicado')) conduta += 'Sintomas psicóticos – considerar antipsicótico. ';
-            if (afet.includes('depress')) conduta += 'Humor deprimido – ajustar antidepressivo e psicoterapia. ';
-            if (mem.includes('hipomnésia') || meemTotal < 24) conduta += 'Investigação de declínio cognitivo (imagem, laboratório). ';
-            conduta += '\nRetorno em 1-2 semanas, suporte CAPS.';
-
-            document.getElementById('outputFinal').innerText = hda + exame + conduta;
-        });
-
-        // copiar
-        document.getElementById('copiarTexto').addEventListener('click', function() {
-            const texto = document.getElementById('outputFinal').innerText;
-            navigator.clipboard.writeText(texto).then(() => alert('✅ Texto copiado!'));
-        });
-    })();
-</script>
+        // Adicionar primeiro medicamento ao carregar
+        window.onload = function() {
+            adicionarMedicamento();
+        };
+    </script>
 </body>
-</html>
+    </html>
